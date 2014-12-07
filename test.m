@@ -28,7 +28,6 @@ min_area = 0.05*initial_area;
 
 
 while(1)
-    url = 'http://192.168.1.102:81/snapshot.cgi?user=admin&pwd=';
     img = imread(url);
     imshow(img);
     [median, area] = medianObstacle(img, hsv_thresh); 
@@ -42,9 +41,9 @@ while(1)
             fwdVel = 0;
         else
             if(area > initial_area)
-                fwdVel = -fwd_vel;        
+                fwdVel = -fwd_vel*(area-initial_area)/initial_area;        
             else
-                fwdVel = fwd_vel;
+                fwdVel = fwd_vel*(initial_area - area)/initial_area;
             end
         end
 
